@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CountryService from '../services/country-service';
 import { Button, DatePicker, version,Select } from "antd";
 import "../assets/css/country.css"
-import Resources from "../libraries/resources"
+import {API_URL} from "../libraries/resources"
 
 export default function CountrySelect(props) {
   const { Option } = Select;
@@ -36,7 +36,7 @@ export default function CountrySelect(props) {
 	const getCountryService = () => {
 		try {
 			(async () => {
-				await CountryService.get(Resources.getValue("apiBaseEnvURL") + Resources.getValue("countryAllApiURL")).then((response) => {
+				await CountryService.get(API_URL + `/api/country/all`).then((response) => {
           setCountryList(response.data);
 				})
 			})();
