@@ -37,6 +37,7 @@ export default function CountrySelect(props) {
 		try {
 			(async () => {
 				await CountryService.get(API_URL + `/api/country/all`).then((response) => {
+          console.log(process.env)
           setCountryList(response.data);
 				})
 			})();
