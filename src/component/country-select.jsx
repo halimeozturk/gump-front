@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import CountryService from '../services/country-service';
 import { Button, DatePicker, version,Select } from "antd";
 import "../assets/css/country.css"
+import Resources from "../libraries/resources"
+
 export default function CountrySelect(props) {
   const { Option } = Select;
   const [countryList,setCountryList] = useState([]);
@@ -11,10 +13,8 @@ export default function CountrySelect(props) {
   const [province,setProvince] = useState();
 
   useEffect(() => {
-    if(countryList.length == 0){
-      getCountryService();
-    }
-  },[countryList,isProvince]);
+    getCountryService();
+  },[]);
 
   const handleChange = (id,type) => {
     
@@ -36,7 +36,7 @@ export default function CountrySelect(props) {
 	const getCountryService = () => {
 		try {
 			(async () => {
-				await CountryService.get(`http://localhost:8080/api/country/all`).then((response) => {
+				await CountryService.get(Resources.getValue("apiBaseEnvURL") + Resources.getValue("countryAllApiURL")).then((response) => {
           setCountryList(response.data);
 				})
 			})();
